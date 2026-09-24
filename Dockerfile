@@ -26,6 +26,7 @@ RUN python model/train.py
 # Quality gate: the build fails if any test fails
 RUN python -m pytest -q -p no:cacheprovider
 
-# Hugging Face Spaces expects the app on port 7860
+# Hosting platforms like Render tell the app which port to use through the PORT
+# environment variable. Locally, PORT isn't set, so it falls back to 7860.
 EXPOSE 7860
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-7860}"]
