@@ -1,0 +1,16 @@
+# Keep these out of the image: local environments, caches, and generated files
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.git
+.DS_Store
+.vscode
+
+# The model and sample data are regenerated inside the image by train.py
+model/*.joblib
+data/
+
+# Scratch files from earlier testing
+results.csv
+row.json
